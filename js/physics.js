@@ -8,11 +8,11 @@
 
   const W = 10, H = 16;
   const BALL_R = 0.2;
-  const CUP_R = 0.3;
+  const CUP_R = 0.28;
   const WALL_T = 0.28;
   const MAX_SHOT = 24;     // units / second at full power
   const SPEED_CAP = 32;
-  const SINK_V = 9.5;      // max speed that still drops in the cup
+  const SINK_V = 7;        // max speed that still drops in the cup
   const STOP_V = 0.16;
   const DT = 1 / 120;
   const BOOST_KICK = 13;
@@ -271,9 +271,9 @@
       // the cup gently gobbles slow balls
       const dcx = c.cup.x - p.x, dcy = c.cup.y - p.y, dc = Math.hypot(dcx, dcy);
       let vx = v.x, vy = v.y;
-      if (dc < CUP_R + 0.18 && speed < 14) {
-        vx += (dcx / (dc || 1)) * 22 * DT;
-        vy += (dcy / (dc || 1)) * 22 * DT;
+      if (dc < CUP_R + 0.12 && speed < 10) {
+        vx += (dcx / (dc || 1)) * 14 * DT;
+        vy += (dcy / (dc || 1)) * 14 * DT;
         speed = Math.hypot(vx, vy);
       }
       const dec = (sf.c + sf.k * speed) * DT;

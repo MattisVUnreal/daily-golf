@@ -1,6 +1,6 @@
 /* Hole of the Day — offline support: precache the app shell, then serve
    cached files instantly while refreshing them in the background. */
-const VERSION = 'hotd-v1';
+const VERSION = 'hotd-v2';
 const ASSETS = [
   './', 'index.html', 'css/style.css', 'manifest.webmanifest', 'icon.svg', 'icon-192.png', 'icon-512.png',
   'js/vendor/planck.min.js', 'js/physics.js', 'js/holes.js', 'js/audio.js', 'js/render.js', 'js/daily.js', 'js/main.js',
