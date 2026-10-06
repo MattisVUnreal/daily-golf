@@ -85,6 +85,7 @@
     $('#hTitle').textContent = `Hole #${n} · Par ${g.course.par}`;
     const chip = g.mode === 'daily' ? '<span class="chip daily">Today</span>'
       : g.mode === 'practice' ? '<span class="chip practice">Practice</span>'
+        : g.mode === 'preview' ? '<span class="chip practice">Preview</span>'
         : '<span class="chip fun">Just for fun</span>';
     $('#hSub').innerHTML = `${esc(g.course.name)} ${chip}`;
     const st = $('#strokes');
@@ -403,7 +404,7 @@
       html += `<div class="result-emoji">${r.info.emoji}</div>
         <p class="result-name">${r.pickedUp ? 'Picked up' : r.info.name}</p>
         <div class="pillrow"><span class="pill">${plural(r.strokes, 'stroke')}</span><span class="pill">Par ${r.par}</span><span class="pill">${D.relText(r.info.rel)}</span></div>
-        <p class="note">${g.mode === 'practice' ? `Practice round on hole #${g.info.number}. It doesn't change your stats.` : 'Just for fun. Your official score for today is locked in.'}</p>
+        <p class="note">${g.mode === 'practice' || g.mode === 'preview' ? `${g.mode === 'preview' ? 'Preview' : 'Practice'} round on hole #${g.info.number}. It doesn't change your stats.` : 'Just for fun. Your official score for today is locked in.'}</p>
         <div class="row"><button class="btn primary" data-act="restart">↻ Play again</button><button class="btn" data-act="practice">More holes</button></div>`;
       if (official) html += `<button class="btn gold" data-act="share">Share today's result</button>`;
       html += countdownHtml();
@@ -641,7 +642,16 @@
   document.addEventListener('visibilitychange', () => { if (!document.hidden) { last = performance.now(); secondTick(); } });
   layout();
   if (today < 0) today = 0; // before launch: preview hole #1
-  startToday();
+  // #hole12 in the address plays any scheduled hole as a preview (used by holes.html)
+  function startFromHash() {
+    const m = /^#hole(\d+)$/.exec(location.hash);
+    if (!m || +m[1] < 1) return false;
+    closeSheet();
+    startRound('preview', +m[1] - 1);
+    return true;
+  }
+  window.addEventListener('hashchange', startFromHash);
+  if (!startFromHash()) startToday();
   requestAnimationFrame(frame);
 
   if ('serviceWorker' in navigator && location.protocol.startsWith('http')) {
