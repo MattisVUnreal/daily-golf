@@ -1,0 +1,55 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no, viewport-fit=cover">
+  <title>Hole of the Day</title>
+  <meta name="description" content="One mini-golf hole a day, the same for everyone. Sink it, share your score, keep your streak.">
+  <meta name="theme-color" content="#5ccb6c">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="default">
+  <link rel="manifest" href="manifest.webmanifest">
+  <link rel="icon" href="icon.svg" type="image/svg+xml">
+  <link rel="apple-touch-icon" href="icon-192.png">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Fredoka:wght@500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+  <div id="app">
+    <canvas id="game" aria-label="Mini-golf course"></canvas>
+
+    <header id="hud">
+      <button id="btnMenu" class="icon-btn" aria-label="Menu">
+        <svg viewBox="0 0 24 24" width="22" height="22"><path d="M4 7h16M4 12h16M4 17h16" stroke="currentColor" stroke-width="2.6" stroke-linecap="round"/></svg>
+      </button>
+      <div class="hud-title">
+        <div id="hTitle">Hole of the Day</div>
+        <div id="hSub"></div>
+      </div>
+      <div id="strokes" class="strokes"><b>0</b><span>strokes</span></div>
+    </header>
+
+    <div id="banner" aria-live="polite"></div>
+    <div id="toast" role="status"></div>
+    <div id="tutorial" hidden>
+      <div class="tut-hand"></div>
+      <p>Drag back from the ball, then let go to shoot!</p>
+    </div>
+
+    <div id="sheet" hidden>
+      <div class="backdrop"></div>
+      <div class="card" id="card" role="dialog" aria-modal="true"></div>
+    </div>
+  </div>
+
+  <script src="js/vendor/planck.min.js"></script>
+  <script src="js/physics.js"></script>
+  <script src="js/holes.js"></script>
+  <script src="js/audio.js"></script>
+  <script src="js/render.js"></script>
+  <script src="js/daily.js"></script>
+  <script src="js/main.js"></script>
+</body>
+</html>

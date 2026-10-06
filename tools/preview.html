@@ -1,0 +1,12 @@
+<!doctype html><meta charset="utf-8"><title>Hole preview</title>
+<style>body{margin:0;background:#222;display:flex;flex-wrap:wrap;gap:4px;font:11px sans-serif;color:#fff}
+.c{width:200px}.c canvas{width:200px;height:300px;display:block}</style>
+<script src="../js/vendor/planck.min.js"></script><script src="../js/physics.js"></script>
+<script src="../js/holes.js"></script><script src="../js/render.js"></script>
+<body><script>
+const q=new URLSearchParams(location.search);const from=+(q.get('from')||0),to=+(q.get('to')||60),mir=q.has('mirror');
+HOTD.HOLES.slice(from,to).forEach((h,i)=>{const d=document.createElement('div');d.className='c';
+d.innerHTML=`<div>${from+i}. ${h.n} · par ${h.par} · d${h.d}</div>`;const cv=document.createElement('canvas');d.appendChild(cv);document.body.appendChild(d);
+const r=new HOTD.Renderer(cv);r.insetTop=0;r.insetBottom=0;r.resize();const c=HOTD.phys.buildCourse(h,mir);r.setCourse(c);const s=new HOTD.phys.Sim(c);
+r.draw({t:0.3,sim:s,ball:{x:c.tee.x,y:c.tee.y,visible:true,scale:1},skinId:'classic',flagUp:1});});
+</script>
