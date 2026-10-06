@@ -1,0 +1,16 @@
+{
+  "name": "Hole of the Day",
+  "short_name": "Hole of the Day",
+  "description": "One mini-golf hole a day, the same for everyone.",
+  "start_url": "./",
+  "scope": "./",
+  "display": "standalone",
+  "orientation": "portrait",
+  "background_color": "#b9f0dd",
+  "theme_color": "#5ccb6c",
+  "icons": [
+    { "src": "icon-192.png", "sizes": "192x192", "type": "image/png" },
+    { "src": "icon-512.png", "sizes": "512x512", "type": "image/png" },
+    { "src": "icon.svg", "sizes": "any", "type": "image/svg+xml" }
+  ]
+}
